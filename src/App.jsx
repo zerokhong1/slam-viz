@@ -5,6 +5,8 @@ const LIMOncelloExplainer = lazy(() => import('./pages/LIMOncelloExplainer'))
 const SGalDeepDive = lazy(() => import('./pages/SGalDeepDive'))
 const OctreeVsIOctree = lazy(() => import('./pages/OctreeVsIOctree'))
 const TreeComparison = lazy(() => import('./pages/TreeComparison'))
+const FxJacobian = lazy(() => import('./pages/FxJacobian'))
+const SGalVsSO3Rigorous = lazy(() => import('./pages/SGalVsSO3Rigorous'))
 
 const C = {
   bg: '#06090f', card: '#0d1420', border: '#182436',
@@ -40,6 +42,20 @@ const pages = [
     desc: 'KNN search, rebalance, latency profiles, benchmarks',
     color: C.purple,
     tag: 'COMPARISON',
+  },
+  {
+    path: '/papers/fx-jacobian',
+    title: 'F_x Jacobian & Covariance',
+    desc: 'Error-state Jacobian: trực giác → toán → Compound vs SGal(3)',
+    color: C.cyan,
+    tag: 'MATH',
+  },
+  {
+    path: '/papers/sgal3-rigorous',
+    title: 'SGal(3) vs SO(3)×ℝ⁶ — Rigorous',
+    desc: 'Timeline · gap analysis · matrix components · Δt selection · SO(2) review',
+    color: '#fb923c',
+    tag: 'ANALYSIS',
   },
 ]
 
@@ -124,7 +140,7 @@ function NavBar() {
       }}>\u2190 Home</Link>
       <span style={{ color: C.muted, fontSize: 12 }}>\u00b7</span>
       <span style={{ color: C.dim, fontSize: 12, fontFamily: 'monospace' }}>
-        {pages.find(p => location.pathname === p.path)?.title || ''}
+        {pages.find(p => p.path === location.pathname)?.title || location.pathname.split('/').pop()}
       </span>
     </div>
   )
@@ -152,6 +168,8 @@ export default function App() {
             <Route path="/sgal3" element={<SGalDeepDive />} />
             <Route path="/octree" element={<OctreeVsIOctree />} />
             <Route path="/trees" element={<TreeComparison />} />
+            <Route path="/papers/fx-jacobian" element={<FxJacobian />} />
+            <Route path="/papers/sgal3-rigorous" element={<SGalVsSO3Rigorous />} />
           </Routes>
         </Suspense>
       </div>
